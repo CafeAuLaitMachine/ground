@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CanSat Ground Station</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>RM&#9889;SM Ground Station</h1>
+            </div>
+            <div class="status">
+                <div class="status-indicator connected">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Connected</span>
+                </div>
+                <div class="mission-time">
+                    <span>Mission Time:</span>
+                    <span id="mission-timer">00:14:32</span>
+                </div>
+            </div>
+        </header>
+        
+
+        <div class="dashboard">
+            <div class="panel main-telemetry">
+                <h2>Live Telemetry</h2>
+                <div class="telemetry-grid">
+                    <div class="telemetry-item">
+                        <div class="telemetry-label">Altitude</div>
+                        <div class="telemetry-value" id="altitude">327.5 m</div>
+                    </div>
+                    <div class="telemetry-item">
+                        <div class="telemetry-label">Temperature</div>
+                        <div class="telemetry-value" id="temperature">24.3 °C</div>
+                    </div>
+                    <div class="telemetry-item">
+                        <div class="telemetry-label">Pressure</div>
+                        <div class="telemetry-value" id="pressure">97.2 kPa</div>
+                    </div>
+                    <div class="telemetry-item">
+                        <div class="telemetry-label">Battery</div>
+                        <div class="telemetry-value" id="battery">3.7 V</div>
+                    </div>
+                    <div class="telemetry-item">
+                        <div class="telemetry-label">Signal</div>
+                        <div class="telemetry-value" id="signal">-67 dBm</div>
+                    </div>
+                    <div class="telemetry-item">
+                        <div class="telemetry-label">GPS Fix</div>
+                        <div class="telemetry-value" id="gps">Valid</div>
+                    </div>
+                    <div class="telemetry-item">
+                        <div class="telemetry-label">CO2 g/smth</div>
+                        <div class="telemetry-value" id="co2">200</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel visualization">
+                <h2>Altitude Profile</h2>
+                <div class="chart-container">
+                    <canvas id="altitudeChart"></canvas>
+                </div>
+            </div>
+
+            <div class="panel location">
+                <h2>Location</h2>
+                <div id="map"></div>
+                <div class="coordinates">
+                    <div class="coordinate">
+                        <span>Latitude:</span>
+                        <span id="latitude">37.2431° N</span>
+                    </div>
+                    <div class="coordinate">
+                        <span>Longitude:</span>
+                        <span id="longitude">115.7930° W</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel orientation">
+                <h2>Orientation</h2>
+                <div class="orientation-visualization">
+                    <div class="attitude-indicator">
+                        <div class="horizon">
+                            <div class="pitch-indicator"></div>
+                        </div>
+                        <div class="roll-indicator"></div>
+                    </div>
+                    <div class="orientation-data">
+                        <div><span>Roll:</span> <span id="roll">5.2°</span></div>
+                        <div><span>Pitch:</span> <span id="pitch">-2.8°</span></div>
+                        <div><span>Yaw:</span> <span id="yaw">184.3°</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel data-log">
+                <h2>Data Log</h2>
+                <div class="log-container">
+                    <table id="data-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Altitude</th>
+                                <th>Temp</th>
+                                <th>Pressure</th>
+                                <th>GPS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data rows will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="log-controls">
+                    <button id="export-data" class="btn-primary">Export Data</button>
+                    <button id="clear-log" class="btn-secondary">Clear Log</button>
+                </div>
+            </div>
+
+            <div class="panel system-status">
+                <h2>System Status</h2>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <div class="status-label">Radio Link</div>
+                        <div class="status-value online">Online</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">GPS</div>
+                        <div class="status-value online">Locked</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Power</div>
+                        <div class="status-value online">Nominal</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Sensors</div>
+                        <div class="status-value online">All OK</div>
+                    </div>
+                </div>
+                <div class="mission-phase">
+                    <h3>Mission Phase</h3>
+                    <div class="phase-indicator">
+                        <div class="phase completed">Launch</div>
+                        <div class="phase active">Ascent</div>
+                        <div class="phase">Descent</div>
+                        <div class="phase">Recovery</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="connection-settings">
+<!--                <select id="port-select">-->
+<!--                    -->
+<!--                </select>-->
+                <button id="connect" class="btn-primary">Connect</button>
+            </div>
+            <div class="footer-info">
+                <span>CanSat Ground Station</span>
+                <span>Team RM&#9889;SM 2025</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
