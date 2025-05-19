@@ -147,16 +147,6 @@ body {
     overflow-y: auto;
 }
 
-/* Pre-formatted text for JSON display */
-pre {
-    max-height: 60vh;
-    overflow-y: auto;
-    white-space: pre-wrap;
-    background-color: #1A1A1A;
-    color: #E0E0E0;
-    border: 1px solid #333333;
-}
-
 /* Form controls */
 .form-control, .form-select {
     background-color: #1A1A1A;
@@ -180,32 +170,21 @@ pre {
     color: #A0A0A0 !important;
 }
 
-/* Value highlights */
-.value-highlight {
-    background-color: rgba(255, 215, 0, 0.2);
-    padding: 2px 5px;
-    border-radius: 3px;
-    font-family: monospace;
+/* Value displays */
+.value-display {
+    font-size: 1.5rem;
     font-weight: bold;
-    color: #FFEE32;
+    color: #FFD700;
+    background-color: #1A1A1A;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
 }
 
-.value-warning {
-    background-color: rgba(255, 193, 7, 0.2);
-    padding: 2px 5px;
-    border-radius: 3px;
-    font-family: monospace;
-    font-weight: bold;
-    color: #FFC107;
-}
-
-.value-danger {
-    background-color: rgba(220, 53, 69, 0.2);
-    padding: 2px 5px;
-    border-radius: 3px;
-    font-family: monospace;
-    font-weight: bold;
-    color: #DC3545;
+.value-display:hover {
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
 }
 
 /* Footer */
@@ -214,93 +193,7 @@ footer {
     border-top: 1px solid #FFD700;
 }
 
-/* Modal styling */
-.modal-content {
-    background-color: #1A1A1A;
-    border: 1px solid #FFD700;
-}
-
-.modal-header {
-    border-bottom: 1px solid #333333;
-}
-
-.modal-footer {
-    border-top: 1px solid #333333;
-}
-
-.btn-close {
-    color: #E0E0E0;
-    filter: invert(1) grayscale(100%) brightness(200%);
-}
-
-/* Pagination */
-.pagination .page-link {
-    background-color: #1A1A1A;
-    border-color: #333333;
-    color: #E0E0E0;
-}
-
-.pagination .page-item.active .page-link {
-    background-color: #FFD700;
-    border-color: #FFD700;
-    color: #0A0A0A;
-}
-
-.pagination .page-link:hover {
-    background-color: #FFEE32;
-    color: #0A0A0A;
-}
-
-.pagination .page-item.disabled .page-link {
-    background-color: #1A1A1A;
-    color: #A0A0A0;
-}
-
-/* Chart customization */
-canvas {
-    background-color: #1A1A1A;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-/* Custom card header colors */
-.card-header.bg-primary {
-    background-color: #0A0A0A !important;
-    color: #FFD700 !important;
-    border-bottom: 1px solid #FFD700;
-}
-
-.card-header.bg-success {
-    background-color: #0A0A0A !important;
-    color: #FFD700 !important;
-    border-bottom: 1px solid #FFD700;
-}
-
-.card-header.bg-info {
-    background-color: #0A0A0A !important;
-    color: #FFD700 !important;
-    border-bottom: 1px solid #FFD700;
-}
-
-.card-header.bg-warning {
-    background-color: #0A0A0A !important;
-    color: #FFD700 !important;
-    border-bottom: 1px solid #FFD700;
-}
-
-.card-header.bg-danger {
-    background-color: #0A0A0A !important;
-    color: #FFD700 !important;
-    border-bottom: 1px solid #FFD700;
-}
-
-.card-header.bg-secondary {
-    background-color: #0A0A0A !important;
-    color: #FFD700 !important;
-    border-bottom: 1px solid #FFD700;
-}
-
-/* Futuristic touches - glowing effects */
+/* Glow effect */
 .glow-effect {
     transition: all 0.3s ease;
 }
@@ -309,16 +202,65 @@ canvas {
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
 }
 
-/* Add some metallic gradients */
-.metallic-card {
-    background: linear-gradient(145deg, #1A1A1A, #0A0A0A);
-    border: 1px solid #333333;
+/* Add space-themed background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #0A0A0A;
+    background-image:
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    opacity: 0.1;
 }
 
-/* About page logo styling */
-.about-logo {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+/* Badges with space theme */
+.badge {
+    background-color: #1A1A1A !important;
+    color: #E0E0E0;
+    border: 1px solid;
+}
+
+.badge.bg-success {
+    border-color: #00F5FF;
+    color: #00F5FF;
+}
+
+.badge.bg-warning {
+    border-color: #FFD700;
+    color: #FFD700;
+}
+
+.badge.bg-danger {
+    border-color: #FF4136;
+    color: #FF4136;
+}
+
+/* Custom bootstrap overrides */
+.navbar-toggler {
+    background-color: #FFD700;
+    border: none;
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 0.75rem;
+    }
+
+    .value-display {
+        font-size: 1.2rem;
+        padding: 5px 10px;
+    }
 }
