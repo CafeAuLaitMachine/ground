@@ -480,3 +480,54 @@ document.addEventListener('DOMContentLoaded', function() {
             historicalData.gyro.y = historicalData.gyro.y.slice(-maxDataPoints);
             historicalData.gyro.z = historicalData.gyro.z.slice(-maxDataPoints);
             historicalData.magnetometer.x = historicalData.magnetometer.x.slice(-maxDataPoints);
+            historicalData.magnetometer.y = historicalData.magnetometer.y.slice(-maxDataPoints);
+            historicalData.magnetometer.z = historicalData.magnetometer.z.slice(-maxDataPoints);
+        }
+    }
+
+    // Helper function to update time series charts
+    function updateTimeSeriesChart(chart, xData, yData, zData) {
+        const labels = Array.from({ length: Math.max(xData.length, yData.length, zData.length) }, (_, i) => i);
+
+        chart.data.labels = labels;
+        chart.data.datasets[0].data = xData;
+        chart.data.datasets[1].data = yData;
+        chart.data.datasets[2].data = zData;
+        chart.update();
+    }
+
+    // Function to update connection status indicator
+    function updateStatusIndicator(isConnected) {
+        const navbar = document.querySelector('.navbar');
+        if (isConnected) {
+            navbar.classList.remove('bg-danger');
+            // Use the dark theme color instead of Bootstrap's dark
+            navbar.style.backgroundColor = '#0A0A0A';
+        } else {
+            navbar.style.backgroundColor = '#0A0A0A';
+            // Add a red border to indicate disconnection rather than changing the entire background
+            navbar.style.borderBottom = '3px solid #DC3545';
+        }
+    }
+
+    // Demo data button
+    document.getElementById('demoDataBtn').addEventListener('click', function() {
+        // Add glow effect when clicked
+        this.classList.add('glow-effect');
+        setTimeout(() => {
+            this.classList.remove('glow-effect');
+        }, 300);
+
+        socket.emit('request_demo_data');
+    });
+
+    // Initial data fetch
+    fetch('/api/current_data')
+        .then(response => response.json())
+        .then(data => {
+            updateDashboard(data);
+        })
+        .catch(error => {
+            console.error('Error fetching initial data:', error);
+        });
+});
